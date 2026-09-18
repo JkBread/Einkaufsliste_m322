@@ -2,32 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 
-function Products() {
+function Products({ products, onAddToList }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const products = [
-    {
-      id: 1,
-      productTitle: "Ramen",
-      category: "Food",
-      imageUrl: "",
-    },
-    {
-      id: 2,
-      productTitle: "Mochi",
-      category: "Food",
-      imageUrl: "",
-    },
-    {
-      id: 3,
-      productTitle: "Manga",
-      category: "Entertainment",
-      imageUrl: "",
-    },
-  ];
 
   const filteredProducts = products.filter((product) =>
-  product.productTitle.toLowerCase().includes(searchTerm.toLowerCase())
-);
+    product.productTitle.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
@@ -40,14 +20,15 @@ function Products() {
         onChange={(event) => setSearchTerm(event.target.value)}
       />
 
-     <Link to="/add-product">
-    <button>Add New Product</button>
-    </Link>
+      <Link to="/add-product">
+        <button>Add New Product</button>
+      </Link>
 
       {filteredProducts.map((product) => (
         <ProductCard
           key={product.id}
           product={product}
+          onAddToList={onAddToList}
         />
       ))}
     </div>

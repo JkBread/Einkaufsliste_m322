@@ -1,11 +1,11 @@
 import ProductForm from "../components/ProductForm";
 
-function AddProduct() {
+function AddProduct({ onAddProduct }) {
   return (
     <div>
       <h1>Add Product</h1>
 
-      <ProductForm />
+      <ProductForm onAddProduct={onAddProduct} />
     </div>
   );
 }
