@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 
 function Products() {
@@ -39,7 +40,9 @@ function Products() {
         onChange={(event) => setSearchTerm(event.target.value)}
       />
 
-      <button>Add New Product</button>
+     <Link to="/add-product">
+    <button>Add New Product</button>
+    </Link>
 
       {filteredProducts.map((product) => (
         <ProductCard
