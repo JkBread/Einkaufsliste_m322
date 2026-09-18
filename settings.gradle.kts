@@ -1,1 +1,0 @@
-rootProject.name = "Einkaufsliste_m322"
