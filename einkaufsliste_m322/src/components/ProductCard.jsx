@@ -1,7 +1,8 @@
-function ProductCard() {
+function ProductCard({ product }) {
   return (
     <div>
-      <h2>Apfel</h2>
+      <h2>{product.productTitle}</h2>
+      <p>{product.category}</p>
       <button>Add</button>
     </div>
   );

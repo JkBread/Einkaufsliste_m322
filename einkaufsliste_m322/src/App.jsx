@@ -1,12 +1,17 @@
-import ProductCard from "./components/ProductCard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Products from "./pages/Products";
+import AddProduct from "./pages/AddProduct";
+import ShoppingList from "./pages/ShoppingList";
 
 function App() {
   return (
-    <div>
-      <h1>Einkaufsliste</h1>
-
-      <ProductCard />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ShoppingList />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/add-product" element={<AddProduct />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
