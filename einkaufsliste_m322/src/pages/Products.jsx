@@ -44,7 +44,7 @@ function Products({
         <h1>Products</h1>
 
         <p>
-          Find your favourite items and add them to your
+          Find your items and add them to your
           shopping list.
         </p>
       </div>
