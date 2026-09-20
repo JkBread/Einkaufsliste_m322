@@ -9,6 +9,30 @@ function ProductForm({ onAddProduct, onAddToList }) {
 
   const navigate = useNavigate();
 
+  function handleImageUrl(event) {
+    setImageUrl(event.target.value);
+  }
+
+  function handleImageUpload(event) {
+    const file = event.target.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setImageUrl(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  function removeImage() {
+    setImageUrl("");
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -29,54 +53,102 @@ function ProductForm({ onAddProduct, onAddToList }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Image URL</label>
-        <input
-          type="text"
-          value={imageUrl}
-          onChange={(event) => setImageUrl(event.target.value)}
-        />
-      </div>
+    <form className="product-form" onSubmit={handleSubmit}>
+      <div className="form-fields">
 
-      <div>
-        <label>Name</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          required
-        />
-      </div>
+        <div className="image-options">
+          <div className="form-group">
+            <label>Image URL</label>
 
-      <div>
-        <label>Quantity</label>
-        <input
-          type="number"
-          min="1"
-          value={quantity}
-          onChange={(event) => setQuantity(event.target.value)}
-        />
-      </div>
+            <input
+              type="text"
+              value={imageUrl.startsWith("data:") ? "" : imageUrl}
+              onChange={handleImageUrl}
+              placeholder="Enter image URL"
+            />
+          </div>
 
-      <div>
-        <label>Category</label>
+          <div className="form-group">
+            <label>Upload Image</label>
 
-        <select
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-          required
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </div>
+        </div>
+
+        {imageUrl && (
+          <button
+            type="button"
+            className="remove-image-button"
+            onClick={removeImage}
+          >
+            Remove Image
+          </button>
+        )}
+
+        <div className="form-group">
+          <label>Name</label>
+
+          <input
+            type="text"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            placeholder="Product name"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Quantity</label>
+
+          <input
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={(event) => setQuantity(event.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Category</label>
+
+          <select
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+            required
+          >
+            <option value="">Select a category</option>
+            <option value="Food">Food</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Household">Household</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <button
+          className="primary-button"
+          type="submit"
         >
-          <option value="">Select a category</option>
-          <option value="Food">Food</option>
-          <option value="Drinks">Drinks</option>
-          <option value="Household">Household</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Other">Other</option>
-        </select>
+          Add Product
+        </button>
+
       </div>
 
-      <button type="submit">Add Product</button>
+      <div className="image-preview">
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt="Product preview"
+          />
+        ) : (
+          <p>Image Preview</p>
+        )}
+      </div>
     </form>
   );
 }

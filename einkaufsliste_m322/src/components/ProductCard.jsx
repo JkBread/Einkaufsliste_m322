@@ -1,44 +1,93 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function ProductCard({ product, onAddToList }) {
+function ProductCard({
+  product,
+  onAddToList,
+  onDeleteProduct,
+}) {
   const [quantity, setQuantity] = useState(1);
 
+  const navigate = useNavigate();
+
+  function decreaseQuantity() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }
+
+  function increaseQuantity() {
+    setQuantity(quantity + 1);
+  }
+
   function handleAddToList() {
-    console.log("Button clicked:", product.productTitle, quantity);
     onAddToList(product, quantity);
   }
 
+  function handleDelete() {
+    onDeleteProduct(product.id);
+  }
+
+  function handleEdit() {
+    navigate(`/edit-product/${product.id}`);
+  }
+
   return (
-    <div>
-      {product.imageUrl && (
+    <div className="product-card">
+      {product.imageUrl ? (
         <img
           src={product.imageUrl}
           alt={product.productTitle}
-          width="150"
+          className="product-image"
         />
+      ) : (
+        <div className="product-image no-image">
+          No image
+        </div>
       )}
 
-      <h2>{product.productTitle}</h2>
-      <p>{product.category}</p>
+      <div className="product-info">
+        <h2>{product.productTitle}</h2>
 
-      <div>
+        <span className="category">
+          {product.category}
+        </span>
+
+        <div className="quantity">
+          <button onClick={decreaseQuantity}>
+            −
+          </button>
+
+          <span>{quantity}</span>
+
+          <button onClick={increaseQuantity}>
+            +
+          </button>
+        </div>
+
         <button
-          onClick={() => setQuantity(quantity - 1)}
-          disabled={quantity <= 1}
+          className="add-button"
+          onClick={handleAddToList}
         >
-          -
+          Add to List
         </button>
 
-        <span>{quantity}</span>
+        <div className="product-edit-buttons">
+        <button
+          className="edit-product-button"
+          onClick={handleEdit}
+        >
+          Edit
+        </button>
 
-        <button onClick={() => setQuantity(quantity + 1)}>
-          +
+        <button
+          className="delete-product-button"
+          onClick={handleDelete}
+        >
+          Delete
         </button>
       </div>
-
-      <button onClick={handleAddToList}>
-        Add to List
-      </button>
+      </div>
     </div>
   );
 }
