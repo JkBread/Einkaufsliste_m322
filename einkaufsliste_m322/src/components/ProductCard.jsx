@@ -10,6 +10,14 @@ function ProductCard({ product, onAddToList }) {
 
   return (
     <div>
+      {product.imageUrl && (
+        <img
+          src={product.imageUrl}
+          alt={product.productTitle}
+          width="150"
+        />
+      )}
+
       <h2>{product.productTitle}</h2>
       <p>{product.category}</p>
 

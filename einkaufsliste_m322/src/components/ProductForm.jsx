@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ProductForm({ onAddProduct }) {
+function ProductForm({ onAddProduct, onAddToList }) {
   const [imageUrl, setImageUrl] = useState("");
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -23,6 +23,7 @@ function ProductForm({ onAddProduct }) {
     };
 
     onAddProduct(newProduct);
+    onAddToList(newProduct, Number(quantity));
 
     navigate("/products");
   }
@@ -44,6 +45,7 @@ function ProductForm({ onAddProduct }) {
           type="text"
           value={name}
           onChange={(event) => setName(event.target.value)}
+          required
         />
       </div>
 
@@ -59,11 +61,19 @@ function ProductForm({ onAddProduct }) {
 
       <div>
         <label>Category</label>
-        <input
-          type="text"
+
+        <select
           value={category}
           onChange={(event) => setCategory(event.target.value)}
-        />
+          required
+        >
+          <option value="">Select a category</option>
+          <option value="Food">Food</option>
+          <option value="Drinks">Drinks</option>
+          <option value="Household">Household</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
 
       <button type="submit">Add Product</button>

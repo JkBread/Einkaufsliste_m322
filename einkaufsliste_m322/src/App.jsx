@@ -21,8 +21,8 @@ function App() {
     },
     {
       id: 3,
-      productTitle: "Manga",
-      category: "Entertainment",
+      productTitle: "Demon Slayer",
+      category: "Manga",
       imageUrl: "",
     },
   ]);
@@ -67,7 +67,12 @@ function App() {
 
         <Route
           path="/add-product"
-          element={<AddProduct onAddProduct={addProduct} />}
+          element={
+            <AddProduct
+              onAddProduct={addProduct}
+              onAddToList={addToList}
+            />
+          }  
         />
       </Routes>
     </BrowserRouter>
