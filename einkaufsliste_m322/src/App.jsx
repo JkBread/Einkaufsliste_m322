@@ -9,6 +9,9 @@ import EditProduct from "./pages/EditProduct";
 
 import "./App.css";
 
+
+// -------------------- START PRODUCTS --------------------
+
 const initialProducts = [
   {
     id: 1,
@@ -30,9 +33,15 @@ const initialProducts = [
   },
 ];
 
+
+// -------------------- APP --------------------
+
 function App() {
   const [products, setProducts] = useState(initialProducts);
   const [shoppingItems, setShoppingItems] = useState([]);
+
+
+  // -------------------- CREATE PRODUCT --------------------
 
   function addProduct(newProduct) {
     setProducts((currentProducts) => [
@@ -40,6 +49,9 @@ function App() {
       newProduct,
     ]);
   }
+
+
+  // -------------------- ADD TO SHOPPING LIST --------------------
 
   function addToList(product, quantity) {
     const shoppingItem = {
@@ -57,6 +69,9 @@ function App() {
     console.log("Added to shopping list:", shoppingItem);
   }
 
+
+  // -------------------- DELETE PRODUCT --------------------
+
   function deleteProduct(productId) {
     setProducts((currentProducts) =>
       currentProducts.filter(
@@ -64,6 +79,9 @@ function App() {
       )
     );
   }
+
+
+  // -------------------- EDIT PRODUCT --------------------
 
   function editProduct(updatedProduct) {
     setProducts((currentProducts) =>
@@ -75,14 +93,19 @@ function App() {
     );
   }
 
+
+  // -------------------- ROUTES --------------------
+
   return (
     <BrowserRouter>
       <div className="app-layout">
+
         <Navbar />
 
         <main className="content">
           <Routes>
 
+            {/* Shopping List */}
             <Route
               path="/"
               element={
@@ -92,6 +115,7 @@ function App() {
               }
             />
 
+            {/* Products */}
             <Route
               path="/products"
               element={
@@ -103,6 +127,7 @@ function App() {
               }
             />
 
+            {/* Add Product */}
             <Route
               path="/add-product"
               element={
@@ -113,6 +138,7 @@ function App() {
               }
             />
 
+            {/* Edit Product */}
             <Route
               path="/edit-product/:id"
               element={
@@ -125,6 +151,7 @@ function App() {
 
           </Routes>
         </main>
+
       </div>
     </BrowserRouter>
   );

@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+// -------------------- PRODUCT FORM --------------------
+
 function ProductForm({ onAddProduct, onAddToList }) {
+
+  // -------------------- FORM STATES --------------------
+
   const [imageUrl, setImageUrl] = useState("");
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -9,9 +15,15 @@ function ProductForm({ onAddProduct, onAddToList }) {
 
   const navigate = useNavigate();
 
+
+  // -------------------- IMAGE URL --------------------
+
   function handleImageUrl(event) {
     setImageUrl(event.target.value);
   }
+
+
+  // -------------------- IMAGE UPLOAD --------------------
 
   function handleImageUpload(event) {
     const file = event.target.files[0];
@@ -29,9 +41,15 @@ function ProductForm({ onAddProduct, onAddToList }) {
     reader.readAsDataURL(file);
   }
 
+
+  // -------------------- REMOVE IMAGE --------------------
+
   function removeImage() {
     setImageUrl("");
   }
+
+
+  // -------------------- CREATE PRODUCT --------------------
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -52,11 +70,19 @@ function ProductForm({ onAddProduct, onAddToList }) {
     navigate("/products");
   }
 
+
+  // -------------------- FORM --------------------
+
   return (
     <form className="product-form" onSubmit={handleSubmit}>
+
       <div className="form-fields">
 
+
+        {/* -------------------- IMAGE OPTIONS -------------------- */}
+
         <div className="image-options">
+
           <div className="form-group">
             <label>Image URL</label>
 
@@ -68,6 +94,9 @@ function ProductForm({ onAddProduct, onAddToList }) {
             />
           </div>
 
+
+          {/* -------------------- UPLOAD IMAGE -------------------- */}
+
           <div className="form-group">
             <label>Upload Image</label>
 
@@ -77,7 +106,11 @@ function ProductForm({ onAddProduct, onAddToList }) {
               onChange={handleImageUpload}
             />
           </div>
+
         </div>
+
+
+        {/* -------------------- REMOVE IMAGE BUTTON -------------------- */}
 
         {imageUrl && (
           <button
@@ -89,17 +122,25 @@ function ProductForm({ onAddProduct, onAddToList }) {
           </button>
         )}
 
+
+        {/* -------------------- PRODUCT NAME -------------------- */}
+
         <div className="form-group">
           <label>Name</label>
 
           <input
             type="text"
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) =>
+              setName(event.target.value)
+            }
             placeholder="Product name"
             required
           />
         </div>
+
+
+        {/* -------------------- QUANTITY -------------------- */}
 
         <div className="form-group">
           <label>Quantity</label>
@@ -108,27 +149,54 @@ function ProductForm({ onAddProduct, onAddToList }) {
             type="number"
             min="1"
             value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
+            onChange={(event) =>
+              setQuantity(event.target.value)
+            }
             required
           />
         </div>
+
+
+        {/* -------------------- CATEGORY -------------------- */}
 
         <div className="form-group">
           <label>Category</label>
 
           <select
             value={category}
-            onChange={(event) => setCategory(event.target.value)}
+            onChange={(event) =>
+              setCategory(event.target.value)
+            }
             required
           >
-            <option value="">Select a category</option>
-            <option value="Food">Food</option>
-            <option value="Drinks">Drinks</option>
-            <option value="Household">Household</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Other">Other</option>
+            <option value="">
+              Select a category
+            </option>
+
+            <option value="Food">
+              Food
+            </option>
+
+            <option value="Drinks">
+              Drinks
+            </option>
+
+            <option value="Household">
+              Household
+            </option>
+
+            <option value="Entertainment">
+              Entertainment
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
           </select>
         </div>
+
+
+        {/* -------------------- ADD PRODUCT BUTTON -------------------- */}
 
         <button
           className="primary-button"
@@ -139,7 +207,11 @@ function ProductForm({ onAddProduct, onAddToList }) {
 
       </div>
 
+
+      {/* -------------------- IMAGE PREVIEW -------------------- */}
+
       <div className="image-preview">
+
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -148,7 +220,9 @@ function ProductForm({ onAddProduct, onAddToList }) {
         ) : (
           <p>Image Preview</p>
         )}
+
       </div>
+
     </form>
   );
 }

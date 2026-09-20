@@ -1,37 +1,65 @@
 import { NavLink } from "react-router-dom";
 
+
+// -------------------- NAVBAR / SIDEBAR --------------------
+
 function Navbar() {
+
   return (
     <aside className="sidebar">
+
+
+      {/* -------------------- LOGO -------------------- */}
+
       <div className="logo">
-        <h1>Shopping<br />List</h1>
-        <span>♡</span>
+        <h1>Shopping</h1>
+        <span>List ♡</span>
       </div>
 
+
+      {/* -------------------- NAVIGATION -------------------- */}
+
       <nav className="navigation">
-        <NavLink to="/products" className="nav-link">
-          ◈
-          <span>Products</span>
+
+        {/* Products */}
+        <NavLink
+          to="/products"
+          className="nav-link"
+        >
+          ◇ Products
         </NavLink>
 
-        <NavLink to="/" className="nav-link">
-          ☷
-          <span>Shopping List</span>
+
+        {/* Shopping List */}
+        <NavLink
+          to="/"
+          className="nav-link"
+        >
+          ☷ Shopping List
         </NavLink>
 
-        <NavLink to="/add-product" className="nav-link">
-          ＋
-          <span>Add Product</span>
+
+        {/* Add Product */}
+        <NavLink
+          to="/add-product"
+          className="nav-link"
+        >
+          ＋ Add Product
         </NavLink>
+
       </nav>
+
+
+      {/* -------------------- SIDEBAR BOTTOM -------------------- */}
 
       <div className="sidebar-bottom">
         <p>
-          Remember<br />
-          what to buy :D
+          Take care of
+          <br />
+          your little joys. ♡
         </p>
-
       </div>
+
     </aside>
   );
 }

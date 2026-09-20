@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+
+// -------------------- EDIT PRODUCT PAGE --------------------
+
 function EditProduct({ products, onEditProduct }) {
+
+  // -------------------- GET PRODUCT ID --------------------
+
   const { id } = useParams();
   const navigate = useNavigate();
+
+
+  // -------------------- FIND PRODUCT --------------------
 
   const product = products.find(
     (product) => String(product.id) === id
   );
+
+
+  // -------------------- FORM STATES --------------------
 
   const [imageUrl, setImageUrl] = useState(
     product ? product.imageUrl : ""
@@ -21,6 +33,9 @@ function EditProduct({ products, onEditProduct }) {
     product ? product.category : ""
   );
 
+
+  // -------------------- PRODUCT NOT FOUND --------------------
+
   if (!product) {
     return (
       <div className="add-product-page">
@@ -28,6 +43,9 @@ function EditProduct({ products, onEditProduct }) {
       </div>
     );
   }
+
+
+  // -------------------- IMAGE UPLOAD --------------------
 
   function handleImageUpload(event) {
     const file = event.target.files[0];
@@ -45,9 +63,15 @@ function EditProduct({ products, onEditProduct }) {
     reader.readAsDataURL(file);
   }
 
+
+  // -------------------- REMOVE IMAGE --------------------
+
   function removeImage() {
     setImageUrl("");
   }
+
+
+  // -------------------- SAVE CHANGES --------------------
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -64,21 +88,35 @@ function EditProduct({ products, onEditProduct }) {
     navigate("/products");
   }
 
+
+  // -------------------- PAGE --------------------
+
   return (
     <div className="add-product-page">
 
+
+      {/* -------------------- PAGE TITLE -------------------- */}
+
       <div className="page-header">
         <h1>Edit Product</h1>
+
         <p>
           Change the product information and save your changes.
         </p>
       </div>
 
+
+      {/* -------------------- EDIT FORM -------------------- */}
+
       <form
         className="product-form"
         onSubmit={handleSubmit}
       >
+
         <div className="form-fields">
+
+
+          {/* -------------------- IMAGE OPTIONS -------------------- */}
 
           <div className="image-options">
 
@@ -99,6 +137,9 @@ function EditProduct({ products, onEditProduct }) {
               />
             </div>
 
+
+            {/* -------------------- UPLOAD IMAGE -------------------- */}
+
             <div className="form-group">
               <label>Upload Image</label>
 
@@ -111,6 +152,9 @@ function EditProduct({ products, onEditProduct }) {
 
           </div>
 
+
+          {/* -------------------- REMOVE IMAGE -------------------- */}
+
           {imageUrl && (
             <button
               type="button"
@@ -120,6 +164,9 @@ function EditProduct({ products, onEditProduct }) {
               Remove Image
             </button>
           )}
+
+
+          {/* -------------------- PRODUCT NAME -------------------- */}
 
           <div className="form-group">
             <label>Name</label>
@@ -134,6 +181,9 @@ function EditProduct({ products, onEditProduct }) {
               required
             />
           </div>
+
+
+          {/* -------------------- CATEGORY -------------------- */}
 
           <div className="form-group">
             <label>Category</label>
@@ -171,6 +221,9 @@ function EditProduct({ products, onEditProduct }) {
             </select>
           </div>
 
+
+          {/* -------------------- SAVE BUTTON -------------------- */}
+
           <button
             className="primary-button"
             type="submit"
@@ -180,7 +233,11 @@ function EditProduct({ products, onEditProduct }) {
 
         </div>
 
+
+        {/* -------------------- IMAGE PREVIEW -------------------- */}
+
         <div className="image-preview">
+
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -189,6 +246,7 @@ function EditProduct({ products, onEditProduct }) {
           ) : (
             <p>Image Preview</p>
           )}
+
         </div>
 
       </form>

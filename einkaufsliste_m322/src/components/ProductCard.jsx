@@ -1,14 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+// -------------------- PRODUCT CARD --------------------
+
 function ProductCard({
   product,
   onAddToList,
   onDeleteProduct,
 }) {
+
+  // -------------------- QUANTITY --------------------
+
   const [quantity, setQuantity] = useState(1);
 
   const navigate = useNavigate();
+
+
+  // -------------------- DECREASE QUANTITY --------------------
 
   function decreaseQuantity() {
     if (quantity > 1) {
@@ -16,24 +25,42 @@ function ProductCard({
     }
   }
 
+
+  // -------------------- INCREASE QUANTITY --------------------
+
   function increaseQuantity() {
     setQuantity(quantity + 1);
   }
+
+
+  // -------------------- ADD TO SHOPPING LIST --------------------
 
   function handleAddToList() {
     onAddToList(product, quantity);
   }
 
-  function handleDelete() {
-    onDeleteProduct(product.id);
-  }
+
+  // -------------------- EDIT PRODUCT --------------------
 
   function handleEdit() {
     navigate(`/edit-product/${product.id}`);
   }
 
+
+  // -------------------- DELETE PRODUCT --------------------
+
+  function handleDelete() {
+    onDeleteProduct(product.id);
+  }
+
+
+  // -------------------- PRODUCT CARD DESIGN --------------------
+
   return (
     <div className="product-card">
+
+      {/* -------------------- PRODUCT IMAGE -------------------- */}
+
       {product.imageUrl ? (
         <img
           src={product.imageUrl}
@@ -46,14 +73,22 @@ function ProductCard({
         </div>
       )}
 
+
+      {/* -------------------- PRODUCT INFORMATION -------------------- */}
+
       <div className="product-info">
+
         <h2>{product.productTitle}</h2>
 
         <span className="category">
           {product.category}
         </span>
 
+
+        {/* -------------------- QUANTITY BUTTONS -------------------- */}
+
         <div className="quantity">
+
           <button onClick={decreaseQuantity}>
             −
           </button>
@@ -63,7 +98,11 @@ function ProductCard({
           <button onClick={increaseQuantity}>
             +
           </button>
+
         </div>
+
+
+        {/* -------------------- ADD TO LIST BUTTON -------------------- */}
 
         <button
           className="add-button"
@@ -72,21 +111,27 @@ function ProductCard({
           Add to List
         </button>
 
-        <div className="product-edit-buttons">
-        <button
-          className="edit-product-button"
-          onClick={handleEdit}
-        >
-          Edit
-        </button>
 
-        <button
-          className="delete-product-button"
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
-      </div>
+        {/* -------------------- EDIT AND DELETE -------------------- */}
+
+        <div className="product-edit-buttons">
+
+          <button
+            className="edit-product-button"
+            onClick={handleEdit}
+          >
+            Edit
+          </button>
+
+          <button
+            className="delete-product-button"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+
+        </div>
+
       </div>
     </div>
   );
