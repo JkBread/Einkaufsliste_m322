@@ -469,11 +469,6 @@ body {
     flex-wrap: wrap;
   }
 
-  .sidebar-bottom {
-    display: none;
-  }
-
-
   /* Pages */
 
   .products-page,

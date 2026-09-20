@@ -48,18 +48,6 @@ function Navbar() {
         </NavLink>
 
       </nav>
-
-
-      {/* -------------------- SIDEBAR BOTTOM -------------------- */}
-
-      <div className="sidebar-bottom">
-        <p>
-          Take care of
-          <br />
-          your little joys. ♡
-        </p>
-      </div>
-
     </aside>
   );
 }
