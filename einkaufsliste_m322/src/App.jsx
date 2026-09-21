@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 import Navbar from "./components/Navbar";
 import Products from "./pages/Products";
@@ -38,7 +39,7 @@ const initialProducts = [
 
 function App() {
   const [products, setProducts] = useState(initialProducts);
-  const [shoppingItems, setShoppingItems] = useState([]);
+  const [shoppingItems, setShoppingItems] = useLocalStorage("shoppingItems", []);
 
 
   // -------------------- CREATE PRODUCT --------------------
@@ -48,6 +49,7 @@ function App() {
       ...currentProducts,
       newProduct,
     ]);
+    addToList(newProduct, 1);
   }
 
 
