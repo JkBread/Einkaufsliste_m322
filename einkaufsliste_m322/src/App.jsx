@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useLocalStorage } from './hooks/useLocalStorage';
 
+
 import Navbar from "./components/Navbar";
 import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
@@ -38,7 +39,7 @@ const initialProducts = [
 // -------------------- APP --------------------
 
 function App() {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useLocalStorage("products", initialProducts);
   const [shoppingItems, setShoppingItems] = useLocalStorage("shoppingItems", []);
 
 
@@ -49,7 +50,6 @@ function App() {
       ...currentProducts,
       newProduct,
     ]);
-    addToList(newProduct, 1);
   }
 
 
@@ -58,6 +58,7 @@ function App() {
   function addToList(product, quantity) {
     const shoppingItem = {
       ...product,
+      id: crypto.randomUUID(),
       quantity: quantity,
       status: false,
       date: new Date().toISOString().split("T")[0],
@@ -113,6 +114,7 @@ function App() {
               element={
                 <ShoppingList
                   shoppingItems={shoppingItems}
+                  setShoppingItems={setShoppingItems}
                 />
               }
             />
